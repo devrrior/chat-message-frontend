@@ -1,12 +1,15 @@
 FROM node:17.6-alpine3.14
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
-COPY ./package.json .
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+COPY package.json .
 
 RUN npm install
 
 COPY . .
 
-EXPOSE 3000
+ENTRYPOINT [ "/entrypoint.sh" ]
 CMD [ "npm", "run", "dev" ]
