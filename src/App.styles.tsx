@@ -1,9 +1,10 @@
 import { createGlobalStyle } from 'styled-components';
-import { normalize } from 'styled-normalize';
 import fontProject from './assets/fonts/OpenSans.ttf';
+import normalize from './index.css'
 
 export const GlobalStyles = createGlobalStyle`
-  // ${normalize}
+
+
   @font-face {
     src: url(${fontProject});
     font-family: Open Sans;
@@ -20,4 +21,6 @@ export const GlobalStyles = createGlobalStyle`
   input:focus, textarea:focus, select:focus{
       outline: none;
   }
+
+  @import url(${normalize})
 `;
