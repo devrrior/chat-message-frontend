@@ -1,10 +1,15 @@
-import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { GlobalStyles } from './App.styles';
+import { LoginPage } from './pages/Login/LoginPage/LoginPage';
 
 function App() {
   return (
-    <>
-      <h1>React with Tailwind on Vite using TS</h1>
-    </>
+    <BrowserRouter>
+      <GlobalStyles />
+      <Routes>
+        <Route path='login/' element={<LoginPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
