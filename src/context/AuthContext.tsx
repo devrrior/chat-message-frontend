@@ -1,3 +1,7 @@
 import { createContext } from 'react';
 
-export const AuthContext = createContext({});
+interface AuthContextProps {
+  loginUser: (email: string, password: string) => void;
+}
+
+export const AuthContext = createContext<AuthContextProps>({} as AuthContextProps);
