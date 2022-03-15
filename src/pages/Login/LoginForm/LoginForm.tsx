@@ -1,10 +1,9 @@
-import { useContext } from 'react';
-import { AuthContext } from '../../../context/AuthContext';
+import { useAuth } from '../../../hooks/useAuth';
 import { LoginFormElement } from '../../../interfaces/formInterfaces';
 import { Button, Input } from './LoginForm.style';
 
 export const LoginForm = () => {
-  const { loginUser } = useContext(AuthContext);
+  const { authState, loginUser } = useAuth();
 
   const handleSubmit = (e: React.FormEvent<LoginFormElement>) => {
     e.preventDefault();
@@ -19,6 +18,7 @@ export const LoginForm = () => {
 
   return (
     <div>
+      { console.log('data', authState) }
       <form onSubmit={handleSubmit}>
         <div>
           <Input type={'text'} id='email' placeholder='Email' />
