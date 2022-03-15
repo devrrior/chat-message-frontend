@@ -1,10 +1,10 @@
-import { axiosInstance } from '../api/axios';
 import { useReducer } from 'react';
 import { AuthState, UserState } from '../interfaces/authInterfaces';
-import { AUTHENTICATED } from './actionTypes';
 import { AuthContext } from './AuthContext';
-import { authReducer } from './authReducer';
+import { authReducer } from '../reducers/authReducers';
+import { axiosInstance } from '../api/axios';
 import jwtDecode from 'jwt-decode';
+import { AUTHENTICATED, LOGOUT } from '../reducers/actionTypes';
 import { TokenPayload } from '../interfaces/tokenInterfaces';
 
 interface AuthProviderProps {
@@ -12,10 +12,11 @@ interface AuthProviderProps {
 }
 
 const USER_INITAL_STATE: UserState = {
+  user_id: null,
   email: null,
   firstName: null,
   lastName: null,
-}
+};
 
 export const INITIAL_STATE: AuthState = {
   user: USER_INITAL_STATE,
@@ -34,10 +35,17 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       return initialState;
     }
 
+    const payload = jwtDecode<TokenPayload>(accessToken);
+
+    const { user_id, email, firstName, lastName, exp } = payload;
+
     return {
       ...initialState,
+      user: { user_id, email, firstName, lastName },
       accessToken,
       refreshToken,
+      isAthenticathed: true,
+      exp,
     };
   };
 
@@ -46,6 +54,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const setToken = (accessToken: string, refreshToken: string): void => {
     localStorage.setItem('accessToken', accessToken);
     localStorage.setItem('refreshToken', refreshToken);
+  };
+
+  const deleteToken = () => {
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
   };
 
   const loginUser = async (email: string, password: string) => {
@@ -63,9 +76,10 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     setToken(accessToken, refreshToken);
     const payload = jwtDecode<TokenPayload>(accessToken);
 
-    const { firstName, lastName, exp } = payload;
+    const { user_id, firstName, lastName, exp } = payload;
 
     const user: UserState = {
+      user_id,
       email,
       firstName,
       lastName,
@@ -82,8 +96,19 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     dispatch({ type: AUTHENTICATED, payload: newAuth });
   };
 
+  const logout = () => {
+    dispatch({ type: LOGOUT, payload: INITIAL_STATE });
+    deleteToken();
+  };
+
   return (
-    <AuthContext.Provider value={{ loginUser }}>
+    <AuthContext.Provider
+      value={{
+        authState,
+        loginUser,
+        logout,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
