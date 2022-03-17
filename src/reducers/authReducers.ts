@@ -1,5 +1,5 @@
 import { AuthAction, AuthState } from '../interfaces/authInterfaces';
-import { AUTHENTICATED, LOGOUT } from './actionTypes';
+import { AUTHENTICATED, LOGOUT, REFRESH } from './actionTypes';
 
 export const authReducer = (
   state: AuthState,
@@ -15,6 +15,13 @@ export const authReducer = (
       return {
         ...action.payload,
       };
+    case REFRESH:
+      const { refreshToken, accessToken } = action.payload;
+      return {
+        ...state,
+        refreshToken,
+        accessToken,
+      }
 
     default:
       return state;
