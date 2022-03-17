@@ -1,10 +1,12 @@
 import axios from 'axios';
-import jwt_decode from 'jwt-decode';
-import dayjs from 'dayjs';
 
-const BASE_URL = 'http://127.0.0.1:8000';
-
+const BASE_URL = 'http://127.0.0.1:8000/';
 
 export const axiosInstance = axios.create({
-  baseURL: BASE_URL
-})
+  baseURL: BASE_URL,
+});
+
+export const axiosPrivate = axios.create({
+  baseURL: BASE_URL,
+  headers: { 'Content-Type': 'application/json' },
+});
