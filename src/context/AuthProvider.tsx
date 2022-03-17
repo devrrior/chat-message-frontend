@@ -1,10 +1,10 @@
 import { useReducer } from 'react';
 import { AuthState, UserState } from '../interfaces/authInterfaces';
 import { AuthContext } from './AuthContext';
-import { authReducer } from '../reducers/authReducers';
+import { authReducer } from '../reducers/authReducer';
 import { axiosInstance } from '../api/axios';
 import jwtDecode from 'jwt-decode';
-import { AUTHENTICATED, LOGOUT } from '../reducers/actionTypes';
+import { AUTHENTICATED, LOGOUT, REFRESH } from '../reducers/actionTypes';
 import { TokenPayload } from '../interfaces/tokenInterfaces';
 
 interface AuthProviderProps {
@@ -62,7 +62,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   };
 
   const loginUser = async (email: string, password: string) => {
-    const LOGIN_URL = '/api/token/';
+    const LOGIN_URL = 'api/token/';
 
     const response = await axiosInstance.post(
       LOGIN_URL,
@@ -96,6 +96,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     dispatch({ type: AUTHENTICATED, payload: newAuth });
   };
 
+  const newTokens = (accessToken: string, refreshToken: string): void => {
+    setToken(accessToken, refreshToken);
+    dispatch({ type: REFRESH, payload: {...INITIAL_STATE, accessToken, refreshToken}})
+  }
+
   const logout = () => {
     dispatch({ type: LOGOUT, payload: INITIAL_STATE });
     deleteToken();
@@ -106,6 +111,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       value={{
         authState,
         loginUser,
+        newTokens,
         logout,
       }}
     >
