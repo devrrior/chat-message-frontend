@@ -66,7 +66,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
     const response = await axiosInstance.post(
       LOGIN_URL,
-      JSON.stringify({ username: email, password: password }),
+      JSON.stringify({ email, password }),
       { headers: { 'Content-Type': 'application/json' } }
     );
 
