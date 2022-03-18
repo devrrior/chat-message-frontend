@@ -1,3 +1,4 @@
+import './index.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { GlobalStyles } from './App.styles';
 import { AuthProvider } from './context/AuthProvider';
