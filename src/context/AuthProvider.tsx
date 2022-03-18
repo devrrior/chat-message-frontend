@@ -61,45 +61,52 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     localStorage.removeItem('refreshToken');
   };
 
-  const loginUser = async (email: string, password: string) => {
-    const LOGIN_URL = 'api/token/';
-
-    const response = await axiosInstance.post(
-      LOGIN_URL,
-      JSON.stringify({ email, password }),
-      { headers: { 'Content-Type': 'application/json' } }
-    );
-
-    const accessToken = await response?.data?.access;
-    const refreshToken = await response?.data?.refresh;
-
-    setToken(accessToken, refreshToken);
-    const payload = jwtDecode<TokenPayload>(accessToken);
-
-    const { user_id, firstName, lastName, exp } = payload;
-
-    const user: UserState = {
-      user_id,
-      email,
-      firstName,
-      lastName,
-    };
-
-    const newAuth: AuthState = {
-      user,
-      isAthenticathed: true,
-      accessToken,
-      refreshToken,
-      exp,
-    };
-
-    dispatch({ type: AUTHENTICATED, payload: newAuth });
-  };
-
   const newTokens = (accessToken: string, refreshToken: string): void => {
     setToken(accessToken, refreshToken);
-    dispatch({ type: REFRESH, payload: {...INITIAL_STATE, accessToken, refreshToken}})
-  }
+    dispatch({
+      type: REFRESH,
+      payload: { ...INITIAL_STATE, accessToken, refreshToken },
+    });
+  };
+
+  const loginUser = (email: string, password: string): Promise<boolean> => {
+    return new Promise((resolve: Function, reject: Function) => {
+      const LOGIN_URL = 'api/token/';
+      axiosInstance
+        .post(LOGIN_URL, JSON.stringify({ email, password }), {
+          headers: { 'Content-Type': 'application/json' },
+        })
+        .then((response) => {
+          const accessToken = response.data.access;
+          const refreshToken = response?.data?.refresh;
+          setToken(accessToken, refreshToken);
+          const payload = jwtDecode<TokenPayload>(accessToken);
+
+          const { user_id, firstName, lastName, exp } = payload;
+
+          const user: UserState = {
+            user_id,
+            email,
+            firstName,
+            lastName,
+          };
+
+          const newAuth: AuthState = {
+            user,
+            isAthenticathed: true,
+            accessToken,
+            refreshToken,
+            exp,
+          };
+          dispatch({ type: AUTHENTICATED, payload: newAuth });
+          resolve();
+        })
+        .catch(() => {
+          dispatch({ type: LOGOUT, payload: INITIAL_STATE });
+          reject();
+        });
+    });
+  };
 
   const logout = () => {
     dispatch({ type: LOGOUT, payload: INITIAL_STATE });

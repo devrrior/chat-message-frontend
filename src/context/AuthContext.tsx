@@ -3,7 +3,7 @@ import { AuthState } from '../interfaces/authInterfaces';
 
 interface AuthContextProps {
   authState: AuthState;
-  loginUser: (email: string, password: string) => void;
+  loginUser: (email: string, password: string) => Promise<boolean>;
   newTokens: (accessToken: string, refreshToken: string) => void;
   logout: () => void;
 }
