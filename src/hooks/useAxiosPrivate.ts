@@ -4,8 +4,6 @@ import { useRefresToken } from './useRefreshToken';
 import { useAuth } from './useAuth';
 import { AxiosRequestConfig } from 'axios';
 
-type headersProps = {};
-
 export const useAxiosPrivate = () => {
   const { refresh } = useRefresToken();
   const { authState } = useAuth();
