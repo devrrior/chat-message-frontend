@@ -1,33 +1,72 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../hooks/useAuth';
 import { LoginFormElement } from '../../../interfaces/formInterfaces';
-import { Button, Input } from './LoginForm.style';
+import { Button, Form, Input, Error } from './LoginForm.style';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+
+interface FormValues {
+  email: string;
+  password: string;
+}
 
 export const LoginForm = () => {
   const { authState, loginUser } = useAuth();
+  const [error, setError] = useState<boolean>(false);
 
-  const handleSubmit = (e: React.FormEvent<LoginFormElement>) => {
-    e.preventDefault();
-    const email = e.currentTarget.elements.email.value;
-    const password = e.currentTarget.elements.password.value;
+  const navigate = useNavigate();
 
-    loginUser(email, password);
+  const initialFormValues: FormValues = { email: '', password: '' };
 
-    e.currentTarget.elements.email.value = '';
-    e.currentTarget.elements.password.value = '';
-  };
+  const formik = useFormik({
+    initialValues: initialFormValues,
+    validationSchema: Yup.object({
+      email: Yup.string().required('Email is required').email('Invalid email'),
+      password: Yup.string().required('Password is required'),
+    }),
+    onSubmit: (values: FormValues, { resetForm }) => {
+      resetForm();
+      console.log(values);
+      loginUser(values.email, values.password)
+        .then(() => {
+          navigate('/');
+        })
+        .catch(() => {
+          setError(true);
+          setTimeout(() => setError(false), 5000);
+        });
+    },
+  });
 
   return (
-    <div>
-      { console.log('data', authState) }
-      <form onSubmit={handleSubmit}>
-        <div>
-          <Input type={'text'} id='email' placeholder='Email' />
-        </div>
-        <div>
-          <Input type={'password'} id='password' placeholder='Password' />
-        </div>
+    <>
+      <Form onSubmit={formik.handleSubmit}>
+        <Input
+          type={'text'}
+          id='email'
+          placeholder='Email'
+          value={formik.values.email}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+        />
+        {formik.touched.email && formik.errors.email && (
+          <Error>{formik.errors.email}</Error>
+        )}
+        <Input
+          type={'password'}
+          id='password'
+          placeholder='Password'
+          value={formik.values.password}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+        />
+        {formik.touched.password && formik.errors.password && (
+          <Error>{formik.errors.password}</Error>
+        )}
         <Button type='submit'>Login</Button>
-      </form>
-    </div>
+        {error && <Error>Email or password incorrect</Error>}
+      </Form>
+    </>
   );
 };

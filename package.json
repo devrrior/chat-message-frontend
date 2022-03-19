@@ -19,10 +19,12 @@
     "autoprefixer": "^10.4.2",
     "axios": "^0.26.1",
     "dayjs": "^1.10.8",
+    "formik": "^2.2.9",
     "jwt-decode": "^3.1.2",
     "react-router-dom": "^6.2.2",
     "styled-components": "^5.3.3",
     "typescript": "^4.5.4",
-    "vite": "^2.8.0"
+    "vite": "^2.8.0",
+    "yup": "^0.32.11"
   }
 }

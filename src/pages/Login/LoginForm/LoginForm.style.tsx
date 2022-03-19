@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Form = styled.form`
-  width: 70%;
+  width: 65%;
 `;
 
 export const Input = styled.input`
@@ -10,7 +10,7 @@ export const Input = styled.input`
   border-radius: 10px;
   padding: 10px 10px 10px 20px;
   margin: 22px 0;
-  width: 30em;
+  width: 100%;
   height: 3em;
 `;
 
@@ -20,11 +20,23 @@ export const Button = styled.button`
   border-radius: 10px;
   padding: 10px;
   margin-top: 31px;
-  width: 30em;
+  margin-bottom: 10px;
+  width: 100%;
   height: 3em;
   cursor: pointer;
 
   &:hover {
-  background: linear-gradient(180deg, #245dbf 0%, #3362b6 100%);
+    background: linear-gradient(180deg, #245dbf 0%, #3362b6 100%);
   }
+`;
+
+export const Error = styled.div`
+  border: 1px solid;
+  margin: 5px 0px;
+  padding: 15px;
+  border-radius: 10px;
+  color: #ba3939;
+  background: #ffe0e0;
+  font-size: 14px;
+  font-weight: 900;
 `;
