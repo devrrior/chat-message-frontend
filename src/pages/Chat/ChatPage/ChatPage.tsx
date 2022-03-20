@@ -1,7 +1,13 @@
+import { ChatSide } from "../ChatSide/ChatSide";
+import { Sidebar } from "../Sidebar/Sidebar";
+import { Container } from "./ChatPage.styles";
+
 export const ChatPage = () => {
   return (
-    <div>
-      <h1>Chat Page</h1>
-    </div>
-  )
-}
+    <Container>
+      
+      <Sidebar/>
+      <ChatSide/>
+    </Container>
+  );
+};
