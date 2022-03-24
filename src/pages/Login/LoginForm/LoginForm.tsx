@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../hooks/useAuth';
-import { LoginFormElement } from '../../../interfaces/formInterfaces';
 import { Button, Form, Input, Error } from './LoginForm.style';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
