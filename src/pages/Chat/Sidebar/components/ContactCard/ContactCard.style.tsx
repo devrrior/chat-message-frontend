@@ -1,22 +1,30 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  padding: 10px;
+  width: 90%;
+  padding: 8px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   background: #f2f2f2;
+  cursor: pointer;
+
+  :hover {
+    background: #e6e6e6;
+    transition: background 120ms linear;
+  }
 `;
 
 export const ProfilePic = styled.img`
-  clip-path: circle();
+  width: 15%;
   height: 55px;
-  width: 55px;
+  clip-path: circle();
   pointer-events: none;
 `;
 
 export const ContainerContactInfo = styled.div`
+  width: 70%;
   display: flex;
   flex-direction: column;
   margin: 0px 13px;
@@ -35,6 +43,7 @@ export const ContactMessage = styled.div`
 `;
 
 export const ContainerMessageInfo = styled.div`
+  width: 15%;
   margin: 0px 13px;
   display: flex;
   flex-direction: column;
