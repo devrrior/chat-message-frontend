@@ -1,25 +1,31 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 50%;
-  background: #f2f2f2;
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  padding: 0px 0px 0px 20px;
+  width: 90%;
+  height: 47px;
+  padding: 0px 10px;
   border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 50px;
+  background: #f2f2f2;
+`;
+
+export const TableContainer = styled.table`
+  width: 100%;
+  height: 100%;
+  vertical-align: middle;
+  padding-left: 10px;
 `;
 
 export const Input = styled.input`
-  flex: 1;
-  background: #f2f2f2;
-  height: 47px;
+  height: 100%;
+  width: 100%;
   font-size: 16px;
-  padding-left: 10px;
+  color: #424242;
+  background: #f2f2f2;
   border-radius: 20px;
+  padding-left: 8px;
 
   ::placeholder {
     color: #424242;
-    font-size: 16px;
   }
 `;
