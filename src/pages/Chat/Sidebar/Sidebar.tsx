@@ -1,12 +1,19 @@
 import { ContactCard } from './components/ContactCard/ContactCard';
 import { SearchInput } from './components/SearchInput/SearchInput';
+import { Container } from './Sidebar.style';
 
 export const Sidebar = () => {
   return (
-    <div>
-      <h1>Sidebar</h1>
+    <Container>
+      <br />
       <SearchInput />
+      <br />
       <ContactCard />
-    </div>
+      <ContactCard />
+      <ContactCard />
+      <ContactCard />
+      <ContactCard />
+      <ContactCard />
+    </Container>
   );
 };
