@@ -1,17 +1,13 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { Container, Input, TableContainer } from './SearchInput.style';
+import { AiOutlineSearch } from 'react-icons/ai';
+
 export const SearchInput = () => {
   return (
     <Container>
       <TableContainer>
         <tr>
-          <td>
-            <FontAwesomeIcon
-              icon={faMagnifyingGlass}
-              fontSize='14px'
-              color='#424242'
-            />
+          <td style={{ width: '30px', paddingTop: '6px' }}>
+            <AiOutlineSearch fontSize='18px' color='#424242' />
           </td>
           <td>
             <Input type='text' placeholder='Search' />

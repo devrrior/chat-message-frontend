@@ -23,7 +23,6 @@ export const Input = styled.input`
   color: #424242;
   background: #f2f2f2;
   border-radius: 20px;
-  padding-left: 8px;
 
   ::placeholder {
     color: #424242;
