@@ -7,3 +7,8 @@ export const Container = styled.div`
   background: #f2f2f2;
   height: 100vh;
 `;
+
+export const ContainerContactCard = styled.div`
+  overflow-y: scroll;
+  width: 90%;
+`;
