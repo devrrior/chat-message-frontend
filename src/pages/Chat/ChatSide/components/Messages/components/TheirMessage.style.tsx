@@ -5,6 +5,7 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  margin: 5px 0px;
 `;
 export const ContainerMessage = styled.div`
   background: #f2f2f2;
