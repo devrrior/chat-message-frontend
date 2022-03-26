@@ -10,19 +10,41 @@ import {
   TimeMessageInfo,
 } from './ContactCard.style';
 
-export const ContactCard = () => {
+interface Props {
+  contactName: string;
+  urlProfilePic: string;
+  lastMessage: string;
+  lastMessageTime: string;
+  infoNotification: number | null;
+}
+
+export const ContactCard = ({
+  contactName,
+  urlProfilePic,
+  lastMessage,
+  lastMessageTime,
+  infoNotification,
+}: Props) => {
   return (
     <Container>
-      <ProfilePic src='https://i.pinimg.com/564x/70/76/bc/7076bc3bb5422124f6e946287fc00e41.jpg' />
+      <ProfilePic src={urlProfilePic} />
       <ContainerContactInfo>
-        <ContactName>Fernando Guerrero</ContactName>
-        <ContactMessage>Lorem impsum</ContactMessage>
+        <ContactName>{contactName}</ContactName>
+        <ContactMessage>{lastMessage.substring(0, 25)}...</ContactMessage>
       </ContainerContactInfo>
       <ContainerMessageInfo>
-        <TimeMessageInfo>19:43</TimeMessageInfo>
-        <NotificationMessageInfo>
-          <InfoNotification>1</InfoNotification>
-        </NotificationMessageInfo>
+        <TimeMessageInfo>{lastMessageTime}</TimeMessageInfo>
+        {infoNotification ? (
+          <NotificationMessageInfo notification={true}>
+            <InfoNotification notification={true}>
+              {infoNotification}
+            </InfoNotification>
+          </NotificationMessageInfo>
+        ) : (
+          <NotificationMessageInfo notification={false}>
+            <InfoNotification notification={false}></InfoNotification>
+          </NotificationMessageInfo>
+        )}
       </ContainerMessageInfo>
     </Container>
   );
