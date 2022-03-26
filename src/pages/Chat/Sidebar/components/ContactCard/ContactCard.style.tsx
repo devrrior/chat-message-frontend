@@ -17,8 +17,8 @@ export const Container = styled.div`
 `;
 
 export const ProfilePic = styled.img`
-  width: 15%;
-  height: 55px;
+  width: 50px;
+  height: auto;
   clip-path: circle();
   pointer-events: none;
 `;
