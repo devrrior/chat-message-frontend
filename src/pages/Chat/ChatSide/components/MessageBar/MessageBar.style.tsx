@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: grid;
-  grid-template-columns: 90% 10%;
-  padding: 0px 20px;
+  grid-template-columns: 88% 12%;
+  padding: 10px 20px;
 `;
 
 export const MessageInput = styled.input`
