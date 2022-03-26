@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 90%;
+  width: 100%;
   padding: 8px;
   display: flex;
   flex-direction: row;
@@ -37,7 +37,7 @@ export const ContactName = styled.h3`
 `;
 
 export const ContactMessage = styled.div`
-  font-size: 15px;
+  font-size: 12px;
   color: #919191;
   margin: 2.5px 5px;
 `;
@@ -56,8 +56,12 @@ export const TimeMessageInfo = styled.p`
   margin: 3.5px 5px;
 `;
 
+interface NotificationMessageInfoProps {
+  notification: boolean;
+}
 export const NotificationMessageInfo = styled.div`
-  background: #2541b2;
+  background: ${({ notification }: NotificationMessageInfoProps) =>
+    notification ? '#2541b2' : 'background-color:rgba(0, 0, 0, 0);'};
   border-radius: 50%;
   width: 21px;
   height: 21px;
@@ -68,7 +72,8 @@ export const NotificationMessageInfo = styled.div`
 `;
 
 export const InfoNotification = styled.p`
-  color: #ffffff;
+  color: ${({ notification }: NotificationMessageInfoProps) =>
+    notification ? '#ffffff' : 'background-color:rgba(0, 0, 0, 0);'};
   font-size: 12px;
   font-weight: 700;
 `;
