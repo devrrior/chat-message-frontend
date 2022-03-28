@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const Container = styled.form`
   display: grid;
   grid-template-columns: 88% 12%;
   padding: 10px 20px;
@@ -15,7 +15,7 @@ export const MessageInput = styled.input`
   margin-right: 10px;
 `;
 
-export const SendButtonContainer = styled.div`
+export const SendButtonContainer = styled.button`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
