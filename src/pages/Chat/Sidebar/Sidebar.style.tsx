@@ -11,4 +11,11 @@ export const Container = styled.div`
 export const ContainerContactCard = styled.div`
   overflow-y: scroll;
   width: 90%;
+
+  ::-webkit-scrollbar {
+    width: 3px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #c2c2c2;
+  }
 `;

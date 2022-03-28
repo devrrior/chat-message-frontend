@@ -5,4 +5,11 @@ export const Container = styled.div`
   flex-direction: column-reverse;
   padding: 10px 18px 10px 18px;
   overflow-y: scroll;
+
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #c2c2c2;
+  }
 `;
