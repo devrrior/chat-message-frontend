@@ -1,11 +1,11 @@
 import { useReducer } from 'react';
-import { AuthState, UserState } from '../interfaces/authInterfaces';
+import { AuthState, UserState } from '../../interfaces/authInterfaces';
 import { AuthContext } from './AuthContext';
-import { authReducer } from '../reducers/authReducer';
-import { axiosInstance } from '../api/axios';
+import { authReducer } from '../../reducers/authReducer';
+import { axiosInstance } from '../../api/axios';
 import jwtDecode from 'jwt-decode';
-import { AUTHENTICATED, LOGOUT, REFRESH } from '../reducers/actionTypes';
-import { TokenPayload } from '../interfaces/tokenInterfaces';
+import { AUTHENTICATED, LOGOUT, REFRESH } from '../../reducers/actionTypes';
+import { TokenPayload } from '../../interfaces/tokenInterfaces';
 
 interface AuthProviderProps {
   children: JSX.Element | JSX.Element[];
