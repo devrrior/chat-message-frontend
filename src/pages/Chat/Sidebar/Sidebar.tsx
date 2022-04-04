@@ -23,6 +23,76 @@ export const Sidebar = () => {
           lastMessageTime='13:32'
           infoNotification={3}
         />
+        <ContactCard
+          contactName='Linda Keebler'
+          urlProfilePic='https://static.intercomassets.com/avatars/435807/square_128/Me_profile_pic-1586948573.png?1586948573'
+          lastMessage='Laboris cillum pariatur culpa amet veniam proident id nisi incididunt pariatur dolore.'
+          lastMessageTime='13:32'
+          infoNotification={null}
+        />
+        <ContactCard
+          contactName='Linda Keebler'
+          urlProfilePic='https://static.intercomassets.com/avatars/435807/square_128/Me_profile_pic-1586948573.png?1586948573'
+          lastMessage='Laboris cillum pariatur culpa amet veniam proident id nisi incididunt pariatur dolore.'
+          lastMessageTime='13:32'
+          infoNotification={1}
+        />
+        <ContactCard
+          contactName='Linda Keebler'
+          urlProfilePic='https://static.intercomassets.com/avatars/435807/square_128/Me_profile_pic-1586948573.png?1586948573'
+          lastMessage='Laboris cillum pariatur culpa amet veniam proident id nisi incididunt pariatur dolore.'
+          lastMessageTime='13:32'
+          infoNotification={null}
+        />
+        <ContactCard
+          contactName='Linda Keebler'
+          urlProfilePic='https://static.intercomassets.com/avatars/435807/square_128/Me_profile_pic-1586948573.png?1586948573'
+          lastMessage='Laboris cillum pariatur culpa amet veniam proident id nisi incididunt pariatur dolore.'
+          lastMessageTime='13:32'
+          infoNotification={null}
+        />
+        <ContactCard
+          contactName='Linda Keebler'
+          urlProfilePic='https://static.intercomassets.com/avatars/435807/square_128/Me_profile_pic-1586948573.png?1586948573'
+          lastMessage='Laboris cillum pariatur culpa amet veniam proident id nisi incididunt pariatur dolore.'
+          lastMessageTime='13:32'
+          infoNotification={null}
+        />
+        <ContactCard
+          contactName='Linda Keebler'
+          urlProfilePic='https://static.intercomassets.com/avatars/435807/square_128/Me_profile_pic-1586948573.png?1586948573'
+          lastMessage='Laboris cillum pariatur culpa amet veniam proident id nisi incididunt pariatur dolore.'
+          lastMessageTime='13:32'
+          infoNotification={null}
+        />
+        <ContactCard
+          contactName='Linda Keebler'
+          urlProfilePic='https://static.intercomassets.com/avatars/435807/square_128/Me_profile_pic-1586948573.png?1586948573'
+          lastMessage='Laboris cillum pariatur culpa amet veniam proident id nisi incididunt pariatur dolore.'
+          lastMessageTime='13:32'
+          infoNotification={null}
+        />
+        <ContactCard
+          contactName='Linda Keebler'
+          urlProfilePic='https://static.intercomassets.com/avatars/435807/square_128/Me_profile_pic-1586948573.png?1586948573'
+          lastMessage='Laboris cillum pariatur culpa amet veniam proident id nisi incididunt pariatur dolore.'
+          lastMessageTime='13:32'
+          infoNotification={null}
+        />
+        <ContactCard
+          contactName='Linda Keebler'
+          urlProfilePic='https://static.intercomassets.com/avatars/435807/square_128/Me_profile_pic-1586948573.png?1586948573'
+          lastMessage='Laboris cillum pariatur culpa amet veniam proident id nisi incididunt pariatur dolore.'
+          lastMessageTime='13:32'
+          infoNotification={null}
+        />
+        <ContactCard
+          contactName='Linda Keebler'
+          urlProfilePic='https://static.intercomassets.com/avatars/435807/square_128/Me_profile_pic-1586948573.png?1586948573'
+          lastMessage='Laboris cillum pariatur culpa amet veniam proident id nisi incididunt pariatur dolore.'
+          lastMessageTime='13:32'
+          infoNotification={null}
+        />
       </ContainerContactCard>
     </Container>
   );
