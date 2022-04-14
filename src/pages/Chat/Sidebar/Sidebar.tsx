@@ -5,9 +5,7 @@ import { Container, ContainerContactCard } from './Sidebar.style';
 export const Sidebar = () => {
   return (
     <Container>
-      <br />
       <SearchInput />
-      <br />
       <ContainerContactCard>
         <ContactCard
           contactName='Linda Keebler'

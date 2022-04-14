@@ -32,6 +32,7 @@ export const ContainerContactInfo = styled.div`
 
 export const ContactName = styled.h3`
   font-size: 16px;
+  font-weight: 400;
   color: #424242;
   margin: 2.5px 5px;
 `;
@@ -75,5 +76,5 @@ export const InfoNotification = styled.p`
   color: ${({ notification }: NotificationMessageInfoProps) =>
     notification ? '#ffffff' : 'background-color:rgba(0, 0, 0, 0);'};
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 600;
 `;

@@ -8,7 +8,6 @@ import { AiOutlineSend } from 'react-icons/ai';
 import { useWebSocket } from '../../../../../hooks/useWebSocket';
 
 export const MessageBar = () => {
-
   const { websocket } = useWebSocket();
 
   const handleSumit = (e: React.SyntheticEvent<HTMLFormElement>) => {
@@ -19,8 +18,11 @@ export const MessageBar = () => {
     };
     const messageText = formElements.messageInput.value;
 
-    websocket.send(JSON.stringify({ message: messageText }));
-    formElements.messageInput.value = '';
+    if (messageText !== '') {
+      websocket.send(JSON.stringify({ message: messageText }));
+      formElements.messageInput.value = '';
+    }
+    // formElements.messageInput.value = '';
   };
   return (
     <Container onSubmit={handleSumit}>

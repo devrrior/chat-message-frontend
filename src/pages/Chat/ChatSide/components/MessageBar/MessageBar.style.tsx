@@ -10,6 +10,7 @@ export const Container = styled.form`
 export const MessageInput = styled.input`
   width: 100%;
   height: 40px;
+  font-size: 14px;
   padding: 10px 10px 10px 15px;
   background: #f2f2f2;
   border-radius: 18px;

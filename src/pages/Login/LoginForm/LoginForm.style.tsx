@@ -38,5 +38,4 @@ export const Error = styled.div`
   background: #ffe0e0;
   color: #ba3939;
   font-size: 14px;
-  font-weight: 900;
 `;
