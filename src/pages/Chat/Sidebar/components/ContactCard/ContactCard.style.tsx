@@ -52,7 +52,7 @@ export const ContainerMessageInfo = styled.div`
 `;
 
 export const TimeMessageInfo = styled.p`
-  font-size: 14px;
+  font-size: 12px;
   color: #919191;
   margin: 3.5px 5px;
 `;
