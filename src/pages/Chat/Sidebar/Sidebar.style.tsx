@@ -11,6 +11,8 @@ export const Container = styled.div`
 export const ContainerContactCard = styled.div`
   overflow-y: scroll;
   width: 90%;
+  scrollbar-width: auto;
+  scrollbar-color: #c2c2c2 transparent;
 
   ::-webkit-scrollbar {
     width: 3px;
