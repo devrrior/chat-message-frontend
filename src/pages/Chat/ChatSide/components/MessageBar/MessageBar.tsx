@@ -19,7 +19,7 @@ export const MessageBar = () => {
     const messageText = formElements.messageInput.value;
 
     if (messageText !== '') {
-      websocket.send(JSON.stringify({ message: messageText }));
+      websocket.send(JSON.stringify({ message: messageText, command: 'new_message' }));
       formElements.messageInput.value = '';
     }
     // formElements.messageInput.value = '';
