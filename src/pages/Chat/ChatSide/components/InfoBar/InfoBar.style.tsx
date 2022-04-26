@@ -7,7 +7,7 @@ export const Container = styled.div`
   width: 100%;
   height: 100%;
   padding: 12px 24px;
-  box-shadow: inset 0px -0.4px 0px rgba(0, 0, 0, 0.25);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 `;
 
 export const ContainerPicAndName = styled.div`
