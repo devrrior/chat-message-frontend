@@ -5,10 +5,10 @@ import {
   SendText,
 } from './MessageBar.style';
 import { AiOutlineSend } from 'react-icons/ai';
-import { useWebSocket } from '../../../../../hooks/useWebSocket';
 
-export const MessageBar = () => {
-  const { websocket } = useWebSocket();
+type Props = { websocket: WebSocket | null };
+export const MessageBar = ({ websocket }: Props) => {
+  // const { websocket } = useWebSocket();
 
   const handleSumit = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -19,7 +19,9 @@ export const MessageBar = () => {
     const messageText = formElements.messageInput.value;
 
     if (messageText !== '') {
-      websocket.send(JSON.stringify({ message: messageText, command: 'new_message' }));
+      websocket?.send(
+        JSON.stringify({ message: messageText, command: 'new_message' })
+      );
       formElements.messageInput.value = '';
     }
     // formElements.messageInput.value = '';
