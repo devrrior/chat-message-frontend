@@ -1,38 +1,68 @@
 import { useEffect } from 'react';
-import { axiosInstance } from '../../../api/axios';
-import { useAuth } from '../../../hooks/useAuth';
+import { Chat, Message } from '../../../interfaces/chatInterfaces';
 import { Container } from './ChastSide.style';
 import { InfoBar } from './components/InfoBar/InfoBar';
 import { MessageBar } from './components/MessageBar/MessageBar';
 import { Messages } from './components/Messages/Messages';
 
-type responseStructure = { access: string; refresh: string };
+type Props = {
+  currentChat: Chat | null;
+  websocket: WebSocket | null;
+  addMessageToCurrentChat: (message: Message, fetchMessages: boolean) => void;
+};
 
-export const ChatSide = () => {
-  const { authState, newTokens } = useAuth();
-
+export const ChatSide = ({
+  currentChat,
+  websocket,
+  addMessageToCurrentChat,
+}: Props) => {
   useEffect(() => {
-    const refreshToken = async () => {
-      const response = await axiosInstance.post<responseStructure>(
-        'api/token/refresh/',
-        JSON.stringify({ refresh: authState.refreshToken }),
-        { headers: { 'Content-Type': 'application/json' } }
-      );
+    if (currentChat !== null && websocket !== null) {
+      websocket.onopen = () => {
+        console.log('connected');
+        fetchMessages(websocket);
+      };
 
-      newTokens(response.data.access, response.data.refresh);
-    };
+      websocket.onmessage = (e) => {
+        const data = JSON.parse(e.data);
+        if (data['command'] === 'messages') {
+          data.messages.map((message: Message) =>
+            addMessageToCurrentChat(message, true)
+          );
+        } else if (data['command'] === 'new_message') {
+          addMessageToCurrentChat(data.message, false);
+        }
+      };
 
-    refreshToken();
-    console.log('done');
-  }, []);
+      websocket.onerror = (e) => {
+        console.log(e); //
+      };
+      websocket.onclose = () => {
+        console.error('Chat socket closed unexpectedly');
+      };
+    } else {
+      console.log('no chat');
+    }
+  }, [currentChat]);
+
+  const fetchMessages = (websocket: WebSocket) => {
+    websocket.send(JSON.stringify({ command: 'fetch_messages' }));
+  };
+
   return (
     <Container>
-      <InfoBar
-        contactName='Alexa Fernandez'
-        urlProfilePic='https://i.pinimg.com/564x/70/76/bc/7076bc3bb5422124f6e946287fc00e41.jpg'
-      />
-      <Messages />
-      <MessageBar />
+      {currentChat === null ? (
+        <h2>Welcome!</h2>
+      ) : (
+        <>
+          <InfoBar
+            contactName={`${currentChat.receiver.first_name} ${currentChat.receiver.last_name}`}
+            urlProfilePic={'https://i.pravatar.cc/300'}
+          />
+          <Messages messages={currentChat?.messages} />
+          <MessageBar websocket={websocket} />
+        </>
+      )}
     </Container>
   );
 };
