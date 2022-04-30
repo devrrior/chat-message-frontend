@@ -20,7 +20,6 @@ export const ChatPage = () => {
         const chats: Chat[] = response.data;
 
         chats.map((chat) => {
-          console.log(chat);
           setChats((prevChats) => [...prevChats, chat]);
         });
       } catch (error) {
@@ -34,6 +33,7 @@ export const ChatPage = () => {
   const changeCurrentChat = (chat: Chat) => {
     const newChat = { ...chat, urlProfileImage: '', messages: [] };
     setCurrentChat(newChat);
+    websocket?.close();
     setWebsocket(
       new WebSocket(
         `ws://127.0.0.1:8000/ws/chat/${chat.id}/?token=${authState.accessToken}`
