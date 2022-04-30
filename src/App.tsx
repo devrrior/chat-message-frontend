@@ -10,7 +10,7 @@ import { WebsocketProvider } from './context/WebSocketContext/WebSocketProvider'
 function App() {
   return (
     <AuthProvider>
-      <WebsocketProvider>
+      {/* <WebsocketProvider> */}
         <BrowserRouter>
           <GlobalStyles />
           <Routes>
@@ -25,7 +25,7 @@ function App() {
             />
           </Routes>
         </BrowserRouter>
-      </WebsocketProvider>
+      {/* </WebsocketProvider> */}
     </AuthProvider>
   );
 }
