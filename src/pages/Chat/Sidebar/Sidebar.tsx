@@ -1,97 +1,42 @@
+import { Chat } from '../../../interfaces/chatInterfaces';
 import { ContactCard } from './components/ContactCard/ContactCard';
 import { SearchInput } from './components/SearchInput/SearchInput';
 import { Container, ContainerContactCard } from './Sidebar.style';
 
-export const Sidebar = () => {
+type Props = {
+  chats: Chat[];
+  changeCurrentChat: (chat: Chat) => void;
+  // setCurrentChat: React.Dispatch<React.SetStateAction<Chat | null>>;
+};
+
+export const Sidebar = ({ chats, changeCurrentChat }: Props) => {
+
+  const renderChats = (chats: Chat[]) => {
+    return chats.map((chat) => {
+      // format time
+      const dataTime = new Date(chat.last_message.created_at);
+      return (
+        <div key={chat.id} onClick={() => changeCurrentChat(chat)}>
+          <ContactCard
+            contactName={`${chat.receiver.first_name} ${chat.receiver.last_name}`}
+            urlProfilePic='https://static.intercomassets.com/avatars/435807/square_128/Me_profile_pic-1586948573.png?1586948573'
+            lastMessage={chat.last_message.content}
+            lastMessageTime={
+              chat.last_message.created_at === undefined
+                ? ''
+                : `${dataTime.getHours()}:${dataTime.getMinutes()}`
+            }
+            infoNotification={null}
+          />
+        </div>
+      );
+    });
+  };
+
   return (
     <Container>
       <SearchInput />
-      <ContainerContactCard>
-        <ContactCard
-          contactName='Linda Keebler'
-          urlProfilePic='https://static.intercomassets.com/avatars/435807/square_128/Me_profile_pic-1586948573.png?1586948573'
-          lastMessage='Laboris cillum pariatur culpa amet veniam proident id nisi incididunt pariatur dolore.'
-          lastMessageTime='13:32'
-          infoNotification={null}
-        />
-        <ContactCard
-          contactName='Linda Keebler'
-          urlProfilePic='https://static.intercomassets.com/avatars/435807/square_128/Me_profile_pic-1586948573.png?1586948573'
-          lastMessage='Laboris cillum pariatur culpa amet veniam proident id nisi incididunt pariatur dolore.'
-          lastMessageTime='13:32'
-          infoNotification={3}
-        />
-        <ContactCard
-          contactName='Linda Keebler'
-          urlProfilePic='https://static.intercomassets.com/avatars/435807/square_128/Me_profile_pic-1586948573.png?1586948573'
-          lastMessage='Laboris cillum pariatur culpa amet veniam proident id nisi incididunt pariatur dolore.'
-          lastMessageTime='13:32'
-          infoNotification={null}
-        />
-        <ContactCard
-          contactName='Linda Keebler'
-          urlProfilePic='https://static.intercomassets.com/avatars/435807/square_128/Me_profile_pic-1586948573.png?1586948573'
-          lastMessage='Laboris cillum pariatur culpa amet veniam proident id nisi incididunt pariatur dolore.'
-          lastMessageTime='13:32'
-          infoNotification={1}
-        />
-        <ContactCard
-          contactName='Linda Keebler'
-          urlProfilePic='https://static.intercomassets.com/avatars/435807/square_128/Me_profile_pic-1586948573.png?1586948573'
-          lastMessage='Laboris cillum pariatur culpa amet veniam proident id nisi incididunt pariatur dolore.'
-          lastMessageTime='13:32'
-          infoNotification={null}
-        />
-        <ContactCard
-          contactName='Linda Keebler'
-          urlProfilePic='https://static.intercomassets.com/avatars/435807/square_128/Me_profile_pic-1586948573.png?1586948573'
-          lastMessage='Laboris cillum pariatur culpa amet veniam proident id nisi incididunt pariatur dolore.'
-          lastMessageTime='13:32'
-          infoNotification={null}
-        />
-        <ContactCard
-          contactName='Linda Keebler'
-          urlProfilePic='https://static.intercomassets.com/avatars/435807/square_128/Me_profile_pic-1586948573.png?1586948573'
-          lastMessage='Laboris cillum pariatur culpa amet veniam proident id nisi incididunt pariatur dolore.'
-          lastMessageTime='13:32'
-          infoNotification={null}
-        />
-        <ContactCard
-          contactName='Linda Keebler'
-          urlProfilePic='https://static.intercomassets.com/avatars/435807/square_128/Me_profile_pic-1586948573.png?1586948573'
-          lastMessage='Laboris cillum pariatur culpa amet veniam proident id nisi incididunt pariatur dolore.'
-          lastMessageTime='13:32'
-          infoNotification={null}
-        />
-        <ContactCard
-          contactName='Linda Keebler'
-          urlProfilePic='https://static.intercomassets.com/avatars/435807/square_128/Me_profile_pic-1586948573.png?1586948573'
-          lastMessage='Laboris cillum pariatur culpa amet veniam proident id nisi incididunt pariatur dolore.'
-          lastMessageTime='13:32'
-          infoNotification={null}
-        />
-        <ContactCard
-          contactName='Linda Keebler'
-          urlProfilePic='https://static.intercomassets.com/avatars/435807/square_128/Me_profile_pic-1586948573.png?1586948573'
-          lastMessage='Laboris cillum pariatur culpa amet veniam proident id nisi incididunt pariatur dolore.'
-          lastMessageTime='13:32'
-          infoNotification={null}
-        />
-        <ContactCard
-          contactName='Linda Keebler'
-          urlProfilePic='https://static.intercomassets.com/avatars/435807/square_128/Me_profile_pic-1586948573.png?1586948573'
-          lastMessage='Laboris cillum pariatur culpa amet veniam proident id nisi incididunt pariatur dolore.'
-          lastMessageTime='13:32'
-          infoNotification={null}
-        />
-        <ContactCard
-          contactName='Linda Keebler'
-          urlProfilePic='https://static.intercomassets.com/avatars/435807/square_128/Me_profile_pic-1586948573.png?1586948573'
-          lastMessage='Laboris cillum pariatur culpa amet veniam proident id nisi incididunt pariatur dolore.'
-          lastMessageTime='13:32'
-          infoNotification={null}
-        />
-      </ContainerContactCard>
+      <ContainerContactCard>{chats && renderChats(chats)}</ContainerContactCard>
     </Container>
   );
 };
