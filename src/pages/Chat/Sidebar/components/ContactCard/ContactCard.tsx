@@ -30,7 +30,9 @@ export const ContactCard = ({
       <ProfilePic src={urlProfilePic} />
       <ContainerContactInfo>
         <ContactName>{contactName}</ContactName>
-        <ContactMessage>{lastMessage.substring(0, 25)}...</ContactMessage>
+        <ContactMessage>
+          {lastMessage === '' ? '' : `${lastMessage.substring(0, 25)}...`}
+        </ContactMessage>
       </ContainerContactInfo>
       <ContainerMessageInfo>
         <TimeMessageInfo>{lastMessageTime}</TimeMessageInfo>
