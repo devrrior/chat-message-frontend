@@ -11,7 +11,7 @@ export interface LastMessage {
 export interface Message {
   contact: string;
   content: string;
-  createdAt: string;
+  created_at: string;
 }
 
 export interface Chat {
