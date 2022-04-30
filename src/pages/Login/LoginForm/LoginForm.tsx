@@ -26,7 +26,6 @@ export const LoginForm = () => {
     }),
     onSubmit: (values: FormValues, { resetForm }) => {
       resetForm();
-      console.log(values);
       loginUser(values.email, values.password)
         .then(() => {
           navigate('/');
