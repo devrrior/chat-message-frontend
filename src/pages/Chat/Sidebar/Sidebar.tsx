@@ -24,7 +24,8 @@ export const Sidebar = ({ chats, changeCurrentChat }: Props) => {
                 ? ''
                 : `${dataTime.getHours()}:${dataTime.getMinutes()}`
             }
-            infoNotification={null}
+            lastMessageContact={chat.last_message.contact}
+            infoNotification={0}
           />
         </div>
       );
