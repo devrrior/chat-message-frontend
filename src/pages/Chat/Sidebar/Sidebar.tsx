@@ -4,15 +4,13 @@ import { SearchInput } from './components/SearchInput/SearchInput';
 import { Container, ContainerContactCard } from './Sidebar.style';
 
 type Props = {
-  chats: Chat[];
+  chats: { [key: number]: Chat };
   changeCurrentChat: (chat: Chat) => void;
-  // setCurrentChat: React.Dispatch<React.SetStateAction<Chat | null>>;
 };
 
 export const Sidebar = ({ chats, changeCurrentChat }: Props) => {
-
-  const renderChats = (chats: Chat[]) => {
-    return chats.map((chat) => {
+  const renderChats = (chats: { [key: number]: Chat }) => {
+    return Object.values(chats).map((chat) => {
       // format time
       const dataTime = new Date(chat.last_message.created_at);
       return (
