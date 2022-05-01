@@ -9,12 +9,14 @@ type Props = {
   currentChat: Chat | null;
   websocket: WebSocket | null;
   addMessageToCurrentChat: (message: Message, fetchMessages: boolean) => void;
+  newNotificationMessage: (message: Message, chat_id: number) => void;
 };
 
 export const ChatSide = ({
   currentChat,
   websocket,
   addMessageToCurrentChat,
+  newNotificationMessage,
 }: Props) => {
   useEffect(() => {
     if (currentChat !== null && websocket !== null) {
@@ -25,12 +27,15 @@ export const ChatSide = ({
 
       websocket.onmessage = (e) => {
         const data = JSON.parse(e.data);
+        console.log('message received', data);
         if (data['command'] === 'messages') {
           data.messages.map((message: Message) =>
             addMessageToCurrentChat(message, true)
           );
         } else if (data['command'] === 'new_message') {
           addMessageToCurrentChat(data.message, false);
+        } else if (data['command'] === 'notification_message') {
+          newNotificationMessage(data.message, data.message.chat_id);
         }
       };
 
