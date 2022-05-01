@@ -8,7 +8,7 @@ import { Container } from './ChatPage.styles';
 
 export const ChatPage = () => {
   const { logout, authState } = useAuth();
-  const [chats, setChats] = useState<Chat[]>([]);
+  const [chats, setChats] = useState<{ [key: number]: Chat }>({});
   const [currentChat, setCurrentChat] = useState<Chat | null>(null);
   const { axiosPrivate } = useAxiosPrivate();
   const [websocket, setWebsocket] = useState<WebSocket | null>(null);
@@ -20,7 +20,7 @@ export const ChatPage = () => {
         const chats: Chat[] = response.data;
 
         chats.map((chat) => {
-          setChats((prevChats) => [...prevChats, chat]);
+          setChats((prevChats) => ({ ...prevChats, [chat.id]: chat }));
         });
       } catch (error) {
         logout();
@@ -57,6 +57,14 @@ export const ChatPage = () => {
     });
   };
 
+  const newNotificationMessage = (message: Message, chatId: number) => {
+    setChats((prevChats) => {
+      const newChats = { ...prevChats };
+      newChats[chatId].last_message = message;
+      return newChats;
+    });
+  };
+
   return (
     <Container>
       <Sidebar chats={chats} changeCurrentChat={changeCurrentChat} />
@@ -64,6 +72,7 @@ export const ChatPage = () => {
         currentChat={currentChat}
         websocket={websocket}
         addMessageToCurrentChat={addMessageToCurrentChat}
+        newNotificationMessage={newNotificationMessage}
       />
     </Container>
   );
