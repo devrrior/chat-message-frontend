@@ -37,9 +37,16 @@ export const ContactName = styled.h3`
   margin: 2.5px 5px;
 `;
 
+interface ContactMessageProps {
+  unread: number;
+}
+
 export const ContactMessage = styled.div`
   font-size: 12px;
-  color: #919191;
+  color: ${({ unread }: ContactMessageProps) =>
+    unread !== 0 ? '#000000' : '#919191'};
+  font-weight: ${({ unread }: ContactMessageProps) =>
+    unread !== 0 ? '700' : '400'};
   margin: 2.5px 5px;
 `;
 

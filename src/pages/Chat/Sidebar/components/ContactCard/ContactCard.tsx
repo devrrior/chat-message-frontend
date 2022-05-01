@@ -1,3 +1,4 @@
+import { useAuth } from '../../../../../hooks/useAuth';
 import {
   ContactMessage,
   ContactName,
@@ -15,7 +16,8 @@ interface Props {
   urlProfilePic: string;
   lastMessage: string;
   lastMessageTime: string;
-  infoNotification: number | null;
+  lastMessageContact: string;
+  infoNotification: number;
 }
 
 export const ContactCard = ({
@@ -23,23 +25,45 @@ export const ContactCard = ({
   urlProfilePic,
   lastMessage,
   lastMessageTime,
+  lastMessageContact,
   infoNotification,
 }: Props) => {
+  const { authState } = useAuth();
+
+  const renderContactMessage = (
+    lastMessage: string,
+    infoNotification: number
+  ) => {
+    if (lastMessage === '') {
+      return <ContactMessage unread={0}>''</ContactMessage>;
+    } else if (lastMessageContact !== authState.user.email) {
+      return (
+        <ContactMessage unread={infoNotification}>
+          {lastMessage === '' ? '' : `${lastMessage.substring(0, 25)}...`}
+        </ContactMessage>
+      );
+    } else if (lastMessageContact === authState.user.email) {
+      return (
+        <ContactMessage unread={infoNotification}>
+          {lastMessage === '' ? '' : `You: ${lastMessage.substring(0, 25)}...`}
+        </ContactMessage>
+      );
+    }
+  };
+
   return (
     <Container>
       <ProfilePic src={urlProfilePic} />
       <ContainerContactInfo>
         <ContactName>{contactName}</ContactName>
-        <ContactMessage>
-          {lastMessage === '' ? '' : `${lastMessage.substring(0, 25)}...`}
-        </ContactMessage>
+        {renderContactMessage(lastMessage, infoNotification)}
       </ContainerContactInfo>
       <ContainerMessageInfo>
         <TimeMessageInfo>{lastMessageTime}</TimeMessageInfo>
-        {infoNotification ? (
+        {infoNotification > 0 ? (
           <NotificationMessageInfo notification={true}>
             <InfoNotification notification={true}>
-              {infoNotification}
+              {infoNotification > 0 ? infoNotification : ''}
             </InfoNotification>
           </NotificationMessageInfo>
         ) : (
