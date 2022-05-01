@@ -22,10 +22,10 @@ export const Sidebar = ({ chats, changeCurrentChat }: Props) => {
             lastMessageTime={
               chat.last_message.created_at === undefined
                 ? ''
-                : `${dataTime.getHours()}:${dataTime.getMinutes()}`
+                : `${String(dataTime.getHours()).padStart(2, '0')}:${String(dataTime.getMinutes()).padStart(2, '0')}`
             }
             lastMessageContact={chat.last_message.contact}
-            infoNotification={0}
+            infoNotification={chat.unread}
           />
         </div>
       );

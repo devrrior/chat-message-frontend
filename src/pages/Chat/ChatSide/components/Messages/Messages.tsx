@@ -15,13 +15,13 @@ export const Messages = ({ messages }: Props) => {
         <MyMessage
           key={id}
           message={message.content}
-          time={`${dataTime.getHours()}:${dataTime.getMinutes()}`}
+          time={`${String(dataTime.getHours()).padStart(2, '0')}:${String(dataTime.getMinutes()).padStart(2, '0')}`}
         />
       ) : (
         <TheirMessage
           key={id}
           message={message.content}
-          time={`${dataTime.getHours()}:${dataTime.getMinutes()}`}
+          time={`${String(dataTime.getHours()).padStart(2, '0')}:${String(dataTime.getMinutes()).padStart(2, '0')}`}
         />
       );
     });
