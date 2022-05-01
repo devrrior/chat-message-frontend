@@ -10,17 +10,18 @@ export const Messages = ({ messages }: Props) => {
 
   const renderMessages = (messages: Message[]) => {
     return messages.map((message, id) => {
+      const dataTime = new Date(message.created_at);
       return message.contact === authState.user.email ? (
         <MyMessage
           key={id}
           message={message.content}
-          time={message.createdAt}
+          time={`${dataTime.getHours()}:${dataTime.getMinutes()}`}
         />
       ) : (
         <TheirMessage
           key={id}
           message={message.content}
-          time={message.createdAt}
+          time={`${dataTime.getHours()}:${dataTime.getMinutes()}`}
         />
       );
     });
