@@ -5,6 +5,7 @@ export interface User {
 
 export interface LastMessage {
   content: string;
+  contact: string;
   created_at: string;
 }
 
@@ -19,6 +20,7 @@ export interface Chat {
   id: number;
   last_message: LastMessage;
   receiver: User;
+  unread: number;
 
   // fields for chat side
   urlProfileImage: string;
