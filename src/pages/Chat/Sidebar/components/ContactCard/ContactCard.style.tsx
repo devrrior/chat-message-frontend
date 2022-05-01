@@ -44,9 +44,9 @@ interface ContactMessageProps {
 export const ContactMessage = styled.div`
   font-size: 12px;
   color: ${({ unread }: ContactMessageProps) =>
-    unread !== 0 ? '#000000' : '#919191'};
+    unread > 0 ? '#000000' : '#919191'};
   font-weight: ${({ unread }: ContactMessageProps) =>
-    unread !== 0 ? '700' : '400'};
+    unread > 0 ? '700' : '400'};
   margin: 2.5px 5px;
 `;
 
