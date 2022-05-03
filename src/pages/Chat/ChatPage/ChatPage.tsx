@@ -20,6 +20,7 @@ export const ChatPage = () => {
         const chats: Chat[] = response.data;
 
         chats.map((chat) => {
+          chat['unread'] = 0;
           setChats((prevChats) => ({ ...prevChats, [chat.id]: chat }));
         });
       } catch (error) {
@@ -31,6 +32,7 @@ export const ChatPage = () => {
   }, []);
 
   const changeCurrentChat = (chat: Chat) => {
+    chat.unread = 0;
     const newChat = { ...chat, urlProfileImage: '', messages: [] };
     setCurrentChat(newChat);
     websocket?.close();
@@ -61,6 +63,9 @@ export const ChatPage = () => {
     setChats((prevChats) => {
       const newChats = { ...prevChats };
       newChats[chatId].last_message = message;
+      if (message.contact !== authState.user.email) {
+        newChats[chatId].unread += 1/2; // idk why set 2
+      }
       return newChats;
     });
   };
