@@ -27,7 +27,6 @@ export const ChatSide = ({
 
       websocket.onmessage = (e) => {
         const data = JSON.parse(e.data);
-        console.log('message received', data);
         if (data['command'] === 'messages') {
           data.messages.map((message: Message) =>
             addMessageToCurrentChat(message, true)
