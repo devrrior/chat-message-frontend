@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useAuth } from '../../../hooks/useAuth';
 import { Chat, Message } from '../../../interfaces/chatInterfaces';
 import { Container } from './ChastSide.style';
 import { InfoBar } from './components/InfoBar/InfoBar';
@@ -18,6 +19,8 @@ export const ChatSide = ({
   addMessageToCurrentChat,
   newNotificationMessage,
 }: Props) => {
+  const { authState } = useAuth();
+
   useEffect(() => {
     if (currentChat !== null && websocket !== null) {
       websocket.onopen = () => {
@@ -56,7 +59,12 @@ export const ChatSide = ({
   return (
     <Container>
       {currentChat === null ? (
-        <h2>Welcome!</h2>
+        <div style={{ margin: '300px auto' }}>
+          <h2>
+            Welcome {authState.user.firstName} {authState.user.lastName}!
+          </h2>
+          <p>Start texting :D</p>
+        </div>
       ) : (
         <>
           <InfoBar
