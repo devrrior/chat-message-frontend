@@ -1,7 +1,12 @@
 import { Chat } from '../../../interfaces/chatInterfaces';
 import { ContactCard } from './components/ContactCard/ContactCard';
+import { PersonalContactCard } from './components/PersonalContactCard/PersonalContactCard';
 import { SearchInput } from './components/SearchInput/SearchInput';
-import { Container, ContainerContactCard } from './Sidebar.style';
+import {
+  Container,
+  ContainerContactCard,
+  ContainerPersonalCard,
+} from './Sidebar.style';
 
 type Props = {
   chats: { [key: number]: Chat };
@@ -36,8 +41,18 @@ export const Sidebar = ({ chats, changeCurrentChat }: Props) => {
 
   return (
     <Container>
-      <SearchInput />
-      <ContainerContactCard>{chats && renderChats(chats)}</ContainerContactCard>
+      <div style={{ width: '100%' }}>
+        <SearchInput />
+        <ContainerContactCard>
+          {chats && renderChats(chats)}
+        </ContainerContactCard>
+      </div>
+      <ContainerPersonalCard>
+        <PersonalContactCard
+          contactName='Fernando Guerrero'
+          urlProfilePic='https://static.intercomassets.com/avatars/435807/square_128/Me_profile_pic-1586948573.png?1586948573'
+        />
+      </ContainerPersonalCard>
     </Container>
   );
 };
